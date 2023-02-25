@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sample VueJS App</title>
+  </head>
+  <body>
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+      <div id="app">{{ message }}</div>
+
+      <div id="shopping-list">
+          <h1>{{ header.toUpperCase() }}</h1>
+          <input v-model="newItem" type="text" placeholder="Place a new item" @keyup.enter="saveItem"/>
+          <button @click="saveItem">Save Item</button>
+          <ul>
+              <li v-for="item in items">{{ item }}</li>
+          </ul>
+      </div>
+
+      <script>
+          const { createApp } = Vue; // static import
+
+          createApp({
+              data() {
+                  //view model
+                  return {
+                      message: 'Hello Vue!'
+                  }
+              }
+          }).mount('#app'); //id of the view
+
+          createApp({
+              data() {
+                  //view model
+                  return {
+                      header: "shopping list app",
+                      newItem: '',
+                      items: [
+                          '10 party hats',
+                          '2 board games',
+                          '20 cups'
+                      ]
+                  }
+              },
+              methods: {
+                  saveItem() {
+                      this.items.push(this.newItem);
+                      this.newItem = '';
+                  }
+              }
+          }).mount("#shopping-list"); //id of the view
+
+      </script>
+  </body>
+</html>
