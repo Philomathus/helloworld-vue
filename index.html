@@ -75,7 +75,28 @@
                   }
               }
           }).mount("#shopping-list"); //id of the view
+      </script>
 
+      <script type="module">
+          import axios from 'axios';
+          let axiosConfig = {
+              headers: {
+                  'Content-Type': 'application/json;charset=UTF-8',
+                  "Access-Control-Allow-Origin": "*",
+              }
+          };
+
+          const postUrl = "http://localhost:5173/api/requestLogger/getByPageWithFilter";
+          const body = {
+              pageNum: 1,
+              pageSize: 10
+          };
+
+          axios.post(postUrl, body).then(
+              (res) => {
+                  console.log('Axios:',res);
+                  console.log('Axios data:',res.data);
+              }).catch((err) => { console.log('Axios Error:', err); });
       </script>
   </body>
 </html>
